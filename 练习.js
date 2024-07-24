@@ -1,30 +1,16 @@
-let old = {
-  name: "Jack",
-  age: 18,
-  hobbit: ["sing", { type: "sports", value: "run" }],
-  score: {
-    math: "A",
-  },
-  run: function () {},
-  walk: undefined,
-  fly: NaN,
-  cy: null,
-  date: new Date(),
-};
-
-
-function cloneDeep(source){
-  if(typeof source !== 'object' || source === null) return source;
-  const target = Array.isArray(source) ? [] : {}
-  for(const key in source){
-    if(Object.prototype.hasOwnProperty.call(source,key)){
-      if(typeof source[key] === 'object' || source !== null){
-        target[key] = cloneDeep(source[key])
-      }else{
-        target[key] = source[key]
-      }
-    }
+function instanceOf(left,right){
+  // 先检查是不是复杂数据类型
+  if(typeof left !== 'object' || left === null) return false;
+  // 拿到left的原型对象
+  const proto = Object.getPrototypeOf(left)
+  while(true){
+    if(proto === null) return false
+    if(proto === right.prototype) return true;
+    proto = Object.getPrototypeOf(proto)
   }
-  return target
 }
-console.log(cloneDeep(old))
+
+console.log(instanceOf(222,Number))
+console.log(instanceOf('99',String))
+console.log(instanceOf([1,2,3],Array))
+console.log(instanceOf({name:'youlingyu',age:'18'},Object))
