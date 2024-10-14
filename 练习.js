@@ -1,15 +1,18 @@
-// 手写instance of
-function mystanceof(left, right){
-  // 先判断是不是复杂数据类型
-  if(typeof left !== 'object' || left === null) return false;
-  console.log(typeof left)
-  let prop = Object.getPrototypeOf(left)
-  while(true){
-    if(prop === null) return false
-    if(prop === right.prototype) return true
-    prop = Object.getPrototypeOf(prop)
-  }
-}
-
-console.log(mystanceof([],Array))
-console.log(mystanceof({name:'youlingyu',age:'18'},Object))
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+  if(!root) return 0;
+  const leftMax = maxDepth(root.left)
+  const rightMax = maxDepth(root.right)
+  return Math.max(leftMax,rightMax) + 1
+};

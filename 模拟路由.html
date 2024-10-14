@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <a href="#/">Home</a>
+    <a href="#/about">About</a>
+    <a href="#/contact">Contact</a>
+</nav>
+<div id="app"></div>
+
+<script>
+    // 路由配置
+    const routes = {
+        '/': '这是首页',
+        '/about': '这是关于页面',
+        '/contact': '这是联系页面',
+    };
+
+    // 更新页面内容的函数
+    function updateContent() {
+        const hash = window.location.hash.slice(1) || '/';
+        console.log(hash, window.location.hash)
+        const content = routes[hash] || '页面未找到';
+        document.getElementById('app').innerText = content;
+    }
+
+    // 监听 hash 变化
+    window.addEventListener('hashchange', updateContent);
+
+    // 页面加载时初始化
+    window.addEventListener('load', updateContent);
+</script>
+</body>
+
+
+</html>
